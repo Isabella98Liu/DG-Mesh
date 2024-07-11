@@ -1,0 +1,7 @@
+# ninja log v5
+1	5779	1702966483200551407	/mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/simple_knn.o	af4199967ec19c77
+0	9128	1702966486548684016	/mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/ext.o	da3be0a24746c98b
+1	29198	1702966506617478899	/mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/spatial.o	1e08375c2a1de1c2
+0	5645	1717621591707105067	/mnt/samsung990/ECCV2024/Release/DG-Mesh/dgmesh/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/simple_knn.o	7d9a4b4aaa466cd4
+0	8785	1717621594843225117	/mnt/samsung990/ECCV2024/Release/DG-Mesh/dgmesh/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/ext.o	96b6727c9718e3ef
+0	28185	1717621614239968498	/mnt/samsung990/ECCV2024/Release/DG-Mesh/dgmesh/submodules/simple-knn/build/temp.linux-x86_64-cpython-39/spatial.o	a30d2d270056c028

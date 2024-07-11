@@ -1,0 +1,34 @@
+ninja_required_version = 1.3
+cxx = c++
+nvcc = /usr/local/cuda/bin/nvcc
+
+cflags = -pthread -B /home/isabella/miniconda3/envs/stag4d/compiler_compat -Wno-unused-result -Wsign-compare -DNDEBUG -fwrapv -O2 -Wall -fPIC -O2 -isystem /home/isabella/miniconda3/envs/stag4d/include -fPIC -O2 -isystem /home/isabella/miniconda3/envs/stag4d/include -fPIC -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include/TH -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/isabella/miniconda3/envs/stag4d/include/python3.10 -c
+post_cflags = -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1011"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -std=c++17
+cuda_cflags = -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include/TH -I/home/isabella/miniconda3/envs/stag4d/lib/python3.10/site-packages/torch/include/THC -I/usr/local/cuda/include -I/home/isabella/miniconda3/envs/stag4d/include/python3.10 -c
+cuda_post_cflags = -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr --compiler-options ''"'"'-fPIC'"'"'' -DTORCH_API_INCLUDE_EXTENSION_H '-DPYBIND11_COMPILER_TYPE="_gcc"' '-DPYBIND11_STDLIB="_libstdcpp"' '-DPYBIND11_BUILD_ABI="_cxxabi1011"' -DTORCH_EXTENSION_NAME=_C -D_GLIBCXX_USE_CXX11_ABI=0 -gencode=arch=compute_86,code=compute_86 -gencode=arch=compute_86,code=sm_86 -std=c++17
+cuda_dlink_post_cflags = 
+ldflags = 
+
+rule compile
+  command = $cxx -MMD -MF $out.d $cflags -c $in -o $out $post_cflags
+  depfile = $out.d
+  deps = gcc
+
+rule cuda_compile
+  depfile = $out.d
+  deps = gcc
+  command = $nvcc --generate-dependencies-with-compile --dependency-output $out.d $cuda_cflags -c $in -o $out $cuda_post_cflags
+
+
+
+
+
+build /mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/ext.o: compile /mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/ext.cpp
+build /mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/simple_knn.o: cuda_compile /mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/simple_knn.cu
+build /mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/build/temp.linux-x86_64-cpython-310/spatial.o: cuda_compile /mnt/samsung990/CVPR2024/code/DMesh/codebases/gaussian_splatting/submodules/simple-knn/spatial.cu
+
+
+
+
+
+
