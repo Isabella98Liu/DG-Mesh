@@ -124,11 +124,11 @@ def rendering_trajectory(
 
         # Query the mesh rendering rgb
         mask, mesh_image, verts, faces, vtx_color = mesh_renderer(
+            glctx,
             gaussians,
             d_xyz,
             d_normal,
             fid,
-            glctx,
             deform_back,
             appearance,
             False,

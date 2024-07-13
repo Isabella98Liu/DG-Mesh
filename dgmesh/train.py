@@ -249,11 +249,11 @@ def training(
             # DPSR
             freeze_pos = iteration < DPSR_ITER + opt.normal_warm_up
             mask, mesh_image, verts, faces, _ = mesh_renderer(
+                glctx,
                 gaussians,
                 d_xyz,
                 d_normal,
                 fid,
-                glctx,
                 deform_back,
                 appearance,
                 freeze_pos,
@@ -401,11 +401,11 @@ def training(
                     d_normal = deform_normal.step(gaussians.get_xyz, time_input)
                     t = torch.tensor([t], device="cuda")
                     verts, faces, vtx_color = mesh_renderer(
+                        glctx,
                         gaussians,
                         d_xyz,
                         d_normal,
                         t,
-                        glctx,
                         deform_back,
                         appearance,
                         freeze_pos,
@@ -445,11 +445,11 @@ def training(
                     d_normal = deform_normal.step(gaussians.get_xyz, time_input)
                     t = torch.tensor([t], device="cuda")
                     verts, faces, vtx_color = mesh_renderer(
+                        glctx,
                         gaussians,
                         d_xyz,
                         d_normal,
                         t,
-                        glctx,
                         deform_back,
                         appearance,
                         freeze_pos,
@@ -623,11 +623,11 @@ def testing(
 
         # Query the mesh rendering
         _, mesh_image, verts, faces, vtx_color = mesh_renderer(
+            glctx,
             gaussians,
             d_xyz,
             d_normal,
             fid,
-            glctx,
             deform_back,
             appearance,
             False,
